@@ -1,0 +1,55 @@
+# File: .github/workflows/ci-stages.yml
+name: Basic CI Stages (echo only)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- Stage: Checkout ---
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --- Stage: Setup ---
+      - name: Setup stage
+        run: |
+          echo "🔧 Setup: initializing environment"
+          echo "PATH=$PATH"
+          echo "Repository checked out to: $GITHUB_WORKSPACE"
+
+      # --- Stage: Build ---
+      - name: Build stage
+        run: |
+          echo "🏗️ Build: compiling sources (mock)"
+          echo "Simulating compilation..."
+          echo "Build artifacts would be produced here."
+
+      # --- Stage: Lint ---
+      - name: Lint stage
+        run: |
+          echo "🧹 Lint: running static checks (mock)"
+          echo "No issues found in mock run."
+
+      # --- Stage: Test ---
+      - name: Test stage
+        run: |
+          echo "🧪 Test: executing unit tests (mock)"
+          echo "All tests passed in mock run."
+
+      # --- Stage: Package ---
+      - name: Package stage
+        run: |
+          echo "📦 Package: bundling artifacts (mock)"
+          echo "Packaging completed."
+
+      # --- Stage: Publish/Deploy ---
+      - name: Deploy stage
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "🚀 Deploy: would publish artifacts (mock)"
+          echo "This runs only on push to main."
